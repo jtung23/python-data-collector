@@ -1,0 +1,262 @@
+{
+	"goArrIds": [
+		{"goName": "Berkeley City Club", "goPlaceId": "ChIJjd1RfCh8hYARphti9hFFTjU"},
+
+		{"goName": "Graduate Berkeley", "goPlaceId": "ChIJO1q-ry98hYARXdN27wXhtqg"},
+
+		{"goName": "Mua Oakland", "goPlaceId": "ChIJc5ERRVOHj4ARu2mIe7m3x-E"},
+
+		{"goName": "Comal", "goPlaceId": "ChIJw3k8iZ5-hYARJSkLTdSXbls"},
+
+		{"goName": "Yoshi's Oakland", "goPlaceId": "ChIJxyGNjMeAj4ARPsZG3cEG1Jc"},
+
+		{"goName": "Aunt Mary's Cafe", "goPlaceId": "ChIJJWghYeJ9hYARId9jSvP1Hrg"},
+
+		{"goName": "Zachary's Chicago Pizza", "goPlaceId": "ChIJ9bZJbMN9hYARZ3JGwPCPnfc"},
+
+		{"goName": "Rudy's Can't Fail Cafe", "goPlaceId": "ChIJHd51CbKAj4ARkc8twT01dNA"},
+
+		{"goName": "Jupiter", "goPlaceId": "ChIJNwUiuJ1-hYARlmMobInl1SI"},
+
+
+		{"goName": "Lake Chalet Seafood Bar & Grill", "goPlaceId": "ChIJk5SFZ0qHj4ARgHF_fZQLnIM"},
+
+
+		{"goName": "Millennium", "goPlaceId": "ChIJ6XYD2ZGAhYARhDX0sVfc6Cc"},
+
+
+		{"goName": "Fentons Creamery", "goPlaceId": "ChIJu948xPZ9hYARMOy-BUTq8pE"},
+
+
+		{"goName": "Chez Panisse", "goPlaceId": "ChIJcYtcJaF-hYAR-VzrwZpQY0E"},
+
+
+		{"goName": "Brown Sugar Kitchen", "goPlaceId": "ChIJY5-blyJ-hYARrkBrUbAzT94"},
+
+
+		{"goName": "International House Cafe", "goPlaceId": "ChIJaYHARDB8hYARRY9Kq7EU3q0"},
+
+
+		{"goName": "Duende", "goPlaceId": "ChIJVTRIc7KAj4ARQMuaZiW2gjs"},
+
+
+		{"goName": "Jong Ga House", "goPlaceId": "ChIJq_X1RE-Hj4ARVMeNS1IGW-8"},
+
+
+		{"goName": "Skates on the Bay", "goPlaceId": "ChIJjU9u7SN_hYARmRvUMMDgJXw"},
+
+
+		{"goName": "East End", "goPlaceId": "ChIJLQS_-JSGj4ARg3k-MnebQeo"},
+
+
+		{"goName": "Awaken Cafe", "goPlaceId": "ChIJIQRT5bOAj4ARtg_luwU-pP4"},
+
+
+		{"goName": "Ippuku", "goPlaceId": "ChIJucLtwJ1-hYAR7qhrXpzINOo"},
+
+
+		{"goName": "Gather", "goPlaceId": "ChIJqUoig51-hYARUnXjcqs8-sg"},
+
+
+		{"goName": "Oliveto", "goPlaceId": "ChIJ_af28sJ9hYARSjYUdP5GYTY"},
+
+
+		{"goName": "Homeroom", "goPlaceId": "ChIJeZcMg_x9hYARMvMaN9kx24Y"},
+
+
+		{"goName": "Trader Vic's Emeryville", "goPlaceId": "ChIJH61_VFJ-hYARxvoUZ-jtdOY"},
+
+
+		{"goName": "The Trappist", "goPlaceId": "ChIJmQfJA7eAj4ARQtgBI1rieD0"},
+
+		{"goName": "Ramen Shop", "goPlaceId": "ChIJqz4ScsN9hYARA0aiLsuEmrA"},
+
+
+		{"goName": "The New Parkway Theater", "goPlaceId": "ChIJFxykYquAj4ARmQ9p6V3m2LQ"},
+
+
+		{"goName": "The Starry Plough Pub", "goPlaceId": "ChIJWYBpOYJ-hYARHM-pU3PMre4"},
+
+
+		{"goName": "Commis", "goPlaceId": "ChIJFzl5Mfh9hYARQmOK6_pAIYw"},
+
+
+		{"goName": "Chevys", "goPlaceId": "ChIJ9R65f1B-hYARNqpttGXKCZg"},
+
+
+		{"goName": "AMF Southshore Lanes", "goPlaceId": "ChIJZTxOWqSGj4ARviuTKUXycAU"},
+
+
+		{"goName": "Extreme Pizza", "goPlaceId": "ChIJh49v1Zx-hYARiC3Exx_hth0"},
+
+
+		{"goName": "Angeline's Louisiana Kitchen", "goPlaceId": "ChIJh_wjBJ1-hYARK2XCkZUkbg0"},
+
+		{"goName": "Champa Garden", "goPlaceId": "ChIJlR2uPT2Hj4ARR5ZnMyJykmE"},
+
+
+		{"goName": "Rudy's Can't Fail Cafe", "goPlaceId": "ChIJwQ8DGBV-hYARjaVV1DJvSeo"},
+
+
+		{"goName": "Beta Lounge", "goPlaceId": "ChIJTaxTTJ1-hYARxQdA42v1VB0"},
+
+
+		{"goName": "Papa John's Pizza", "goPlaceId": "ChIJs9aHq51-hYARgpXT0gqPGv0"},
+
+
+		{"goName": "CommonWealth Café and Public House", "goPlaceId": "ChIJZTtCkKqAj4ARlg7QMuuhSRc"},
+
+
+		{"goName": "Xolo", "goPlaceId": "ChIJm_SgdLKAj4ARFZbKlfEhGB4"},
+
+		{"goName": "Jade Palace Chinese Kitchen", "goPlaceId": "ChIJLy_C-qyHj4ARbuWPRKIlJ9w"},
+
+		{"goName": "In-N-Out Burger", "goPlaceId": "ChIJdcjyFL6Fj4ARjC4VGEYmS6w"},
+
+		{"goName": "Spenger's Fresh Fish Grotto", "goPlaceId": "ChIJ7aXDLt1-hYARDokb6x7VsYs"},
+
+
+		{"goName": "Arizmendi Bakery & Pizzeria", "goPlaceId": "ChIJ7YbfORN-hYARoy9V0MUxYy4"},
+
+
+		{"goName": "The Cheeseboard Pizza", "goPlaceId": "ChIJr5hMNKF-hYARxmkk-5t0SzE"},
+
+
+		{"goName": "La Note Restaurant", "goPlaceId": "ChIJB_-A0oJ-hYARwmbyJJR3sUo"},
+
+
+		{"goName": "Camino", "goPlaceId": "ChIJBVEcql2Hj4ARQDiqdAc9pxI"},
+
+
+		{"goName": "Au Coquelet", "goPlaceId": "ChIJU4rlzp5-hYARhtqduurlWiE"},
+
+
+		{"goName": "Hong Kong East Ocean Seafood Restaurant", "goPlaceId": "ChIJD_JZHlN-hYARrcTsLN1xvHo"},
+
+
+		{"goName": "District Oakland", "goPlaceId": "ChIJ4wJqPLeAj4ARCTGNdIr6H9U"},
+
+
+		{"goName": "A16", "goPlaceId": "ChIJTVP-Hel9hYARNg-qwnbVajQ"},
+
+		{"goName": "Paisan Berkeley", "goPlaceId": "ChIJgVpoae1-hYARXdz96el29MY"},
+
+
+		{"goName": "Scott's Seafood Grill & Bar", "goPlaceId": "ChIJPZgYK8aAj4ARaDsas8rwD1g"},
+
+		{"goName": "Pizzaiolo", "goPlaceId": "ChIJYdYrAeF9hYARXSv17bySojU"}
+	],
+
+	"yelpArrIds": [
+		{"yelpId": "berkeley-city-club-berkeley"},
+
+		{"yelpId": "graduate-berkeley-berkeley"},
+
+		{"yelpId": "mua-oakland-2"},
+
+		{"yelpId": "comal-berkeley"},	
+
+		{"yelpId": "yoshis-oakland-3"},	
+
+		{"yelpId": "aunt-marys-café-oakland-5"},
+
+		{"yelpId": "zacharys-chicago-pizza-oakland"},
+
+		{"yelpId": "rudys-cant-fail-cafe-oakland-2"},
+
+		{"yelpId": "jupiter-berkeley"},
+
+		{"yelpId": "lake-chalet-seafood-bar-and-grill-oakland"},
+
+		{"yelpId": "millennium-oakland"},
+
+		{"yelpId": "fentons-creamery-oakland-2"},
+
+		{"yelpId": "chez-panisse-berkeley"},
+
+		{"yelpId": "brown-sugar-kitchen-oakland"},
+
+		{"yelpId": "international-house-cafe-berkeley"},
+
+		{"yelpId": "duende-oakland"},
+
+		{"yelpId": "jong-ga-house-oakland"},
+
+		{"yelpId": "skates-on-the-bay-berkeley"},
+
+		{"yelpId": "east-end-alameda"},
+
+		{"yelpId": "awaken-café-oakland-2"},
+
+		{"yelpId": "ippuku-berkeley-2"},
+
+		{"yelpId": "gather-berkeley"},
+
+		{"yelpId": "oliveto-cafe-and-restaurant-oakland"},
+
+		{"yelpId": "homeroom-oakland"},
+
+		{"yelpId": "trader-vics-emeryville"},
+
+		{"yelpId": "the-trappist-oakland"},
+
+		{"yelpId": "ramen-shop-oakland"},
+
+		{"yelpId": "the-new-parkway-oakland"},
+
+		{"yelpId": "the-starry-plough-berkeley"},
+
+		{"yelpId": "commis-oakland-2"},
+
+		{"yelpId": "chevys-fresh-mex-emeryville-4"},
+
+		{"yelpId": "amf-southshore-lanes-alameda-3"},
+
+		{"yelpId": "extreme-pizza-shattuck-ave-berkeley"},
+
+		{"yelpId": "angelines-louisiana-kitchen-berkeley"},
+
+		{"yelpId": "champa-garden-oakland"},
+
+		{"yelpId": "rudys-cant-fail-cafe-emeryville-3"},
+
+		{"yelpId": "beta-lounge-berkeley"},
+
+		{"yelpId": "papa-johns-pizza-berkeley"},
+
+		{"yelpId": "commonwealth-cafe-and-public-house-oakland-2"},
+
+		{"yelpId": "xolo-oakland"},
+
+		{"yelpId": "jade-palace-oakland"},
+
+		{"yelpId": "in-n-out-burger-oakland"},
+
+		{"yelpId": "spengers-fresh-fish-grotto-berkeley"},
+
+		{"yelpId": "arizmendi-bakery-and-pizzeria-emeryville"},
+
+		{"yelpId": "cheese-board-pizza-berkeley"},
+
+		{"yelpId": "la-note-berkeley-5"},
+
+		{"yelpId": "camino-oakland"},
+
+		{"yelpId": "au-coquelet-cafe-restaurant-berkeley"},
+
+		{"yelpId": "hong-kong-east-ocean-seafood-restaurant-emeryville"},
+
+		{"yelpId": "district-oakland-oakland"},
+
+		{"yelpId": "a16-rockridge-oakland"},
+
+		{"yelpId": "paisan-berkeley"},
+
+		{"yelpId": "scotts-seafood-oakland"},
+
+		{"yelpId": "pizzaiolo-oakland"}
+
+	]
+}
+
+
