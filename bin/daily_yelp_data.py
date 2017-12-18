@@ -77,7 +77,7 @@ yelp_restaurants = db.yelprestaurants
 
 # # to update rating and reviews
 for value in updated_list:
-	new_restaurants.find_one_and_update({
+	yelp_restaurants.find_one_and_update({
 		'yelpId': value['yelpId']
 		},
 		{
