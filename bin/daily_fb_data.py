@@ -22,7 +22,7 @@ client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku
 db = client.heroku_vg8qr96g
 
 # Updates yelpId database based on id_arrays.json
-jsondata = json.load(open('id_arrays.json'))
+jsondata = json.load(open('/app/bin/id_arrays.json'))
 
 json_go_names = jsondata['goArrIds']
 
@@ -48,10 +48,6 @@ events = graph.request(search_link)
 event_list= events['data']
 my_list.append(event_list)
 
-# pp.pprint(my_list)
-
-#for i, item in enumerate(my_list):
-
 
 restaurants= []
 this_list = my_list[0]
@@ -62,18 +58,21 @@ for item in this_list:
 	new['name']= item['name']
 	new['single_line_address']= item['single_line_address']
 	new['checkins']= item['checkins']
-	new['rating_count']= item['rating_count']
+	new['rating_count']= {
+		item['rating_count'],
+		'query_date': str(now)
+		}
 	new['id']= item['id']
 	restaurants.append(new)
 
-pp.pprint(restaurants)
-
-print(len(restaurants))
 
 fb_restaurants = db.Fbrestaurants
 for item in restaurants:
 	fb_restaurants.update_one({'fbId': item['id']},
 		{"$set":item}, upsert=True)
 
-print(fb_restaurants.count())
-# EAAG0XCqokvMBADXjKrYtgQtp6E1PCWuUOXJ1ZBCOs1rGwp4tBOzJR0IcndbZAH83g3PGhZASgNmuvt0YEPafpCMzX6civGEQOHg8DWIgDILaniCbmnyTwmyDHbVbR53OEEbLT8c9AZBKy01THwgLCGTl3xZB1Xc8XpV5lNDsTogZDZD
+
+for item in this_list:
+	new = {}
+	new['checkins']= item['checkins']
+	new['rating_count']= item['rating_count']
