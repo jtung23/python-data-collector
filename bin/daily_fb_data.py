@@ -10,7 +10,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 import datetime
-now = datetime.datetime.now()
+now = datetime.datetime.utcnow()
 
 import urllib3
 import facebook

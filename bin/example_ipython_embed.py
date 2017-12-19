@@ -2,4 +2,7 @@
 example_stuf = {
 	'whatever': 3,
 }
-import IPython; IPython.embed()
+import datetime
+
+print(datetime.datetime.utcnow())
+print(datetime.datetime.now())
