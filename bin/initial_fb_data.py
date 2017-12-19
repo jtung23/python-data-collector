@@ -22,7 +22,7 @@ client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku
 db = client.heroku_vg8qr96g
 
 # Updates yelpId database based on id_arrays.json
-jsondata = json.load(open('id_arrays.json'))
+jsondata = json.load(open('/app/bin/id_arrays.json'))
 
 json_go_names = jsondata['goArrIds']
 
