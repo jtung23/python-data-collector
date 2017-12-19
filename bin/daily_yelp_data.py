@@ -54,8 +54,11 @@ for value in updated_list:
 		'yelpId': value['yelpId']
 		},
 		{
-		'$push': {
-			'reviews': value['reviews']
+		'$set': {
+			'rating': [{
+				'rating': value['rating'],
+				'query_date': str(now)
+			}]
 		}
 		# '$set': {'rating': value['rating']}
 		}

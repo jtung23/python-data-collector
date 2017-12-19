@@ -75,6 +75,7 @@ for item in this_list:
 		'latitude': item['location']['latitude'],
 		'longitude': item['location']['longitude']
 	}
+	new['price_range'] = item.get('price_range')
 	new['fbId']= item['id']
 	restaurants.append(new)
 
