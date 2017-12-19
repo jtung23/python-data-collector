@@ -43,6 +43,10 @@ for item in new_data:
 			'rating_count': {
 				'rating_count': item['rating_count'],
 				'query_date': str(now)
+			},
+			'checkins': {
+				'checkins': item['checkins'],
+				'query_date': str(now)
 			}
 		}
 	})

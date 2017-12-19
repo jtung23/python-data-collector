@@ -57,7 +57,10 @@ for item in this_list:
 	new = {}
 	new['name']= item['name']
 	new['single_line_address']= item['single_line_address']
-	new['checkins']= item['checkins']
+	new['checkins']= [{
+		'checkins': item['checkins'],
+		'query_date': str(now)
+	}]
 	new['rating_count']= [{
 		'rating_count': item['rating_count'],
 		'query_date': str(now)
