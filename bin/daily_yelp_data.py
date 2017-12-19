@@ -18,9 +18,9 @@ db = client.heroku_vg8qr96g
 # yelp_ids = jsondata['yelpArrIds']
 
 yelpIds = db.yelpIds
-for doc in yelp_ids:
-	yelpIds.update_one({'yelpId': doc['yelpId']},
-		{"$set":doc}, upsert=True)
+# for doc in yelp_ids:
+# 	yelpIds.update_one({'yelpId': doc['yelpId']},
+# 		{"$set":doc}, upsert=True)
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 items = list(yelpIds.find())
