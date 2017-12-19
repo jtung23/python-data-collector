@@ -48,8 +48,18 @@ my_list = []
 # 	my_list.append(data)
 
 # # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# # insert my_list into the collection
+yelp_restaurants = db.yelprestaurants
+# # 
+# # To insert the array of new restaurants
+# for data in my_list:
+# 	yelp_restaurants.update_one({'yelpId': data['yelpId']},
+# 		{"$set":data}, upsert=True)
+# print(yelp_restaurants.count())
+
+# # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 updated_list = []
-# # for looping through ids and returning new rating and review count
+# # # for looping through ids and returning new rating and review count
 for val in items:
 	yelp_id = val['yelpId']
 	r = requests.get('https://api.yelp.com/v3/businesses/' + yelp_id, 
@@ -65,15 +75,7 @@ for val in items:
 		}
 	updated_list.append(data)
 # # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# # insert my_list into the collection
-yelp_restaurants = db.yelprestaurants
-# # 
-# # To insert the array of new restaurants
-# for data in my_list:
-# 	yelp_restaurants.update_one({'yelpId': data['yelpId']},
-# 		{"$set":data}, upsert=True)
-# print(yelp_restaurants.count())
-# # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 # # to update rating and reviews
 for value in updated_list:
