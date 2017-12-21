@@ -55,7 +55,7 @@ for value in updated_list:
 		},
 		{
 		'$push': {
-			'review_count': {
+			'reviews': {
 				'review_count': value['review_count'],
 				'query_date': str(now)
 			}
