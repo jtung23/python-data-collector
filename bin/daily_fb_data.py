@@ -31,7 +31,6 @@ for item in restaurants:
 	place_id = item['fbId']
 	search_link= place_id + '?fields=name,rating_count,checkins'
 	restaurants = graph.request(search_link)
-	place_list= restaurants
 	new_data.append(restaurants)
 
 for item in new_data:
