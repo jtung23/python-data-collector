@@ -34,8 +34,7 @@ fb_ids = []
 
 for each in restaurants:
 	fb_ids.append(each['fbId'])
-pp.pprint(yelp_ids)
-pp.pprint(fb_ids)
+
 # Yelp update
 updated_list = []
 for each in yelp_ids:
@@ -58,6 +57,7 @@ for each in yelp_ids:
 	)
 
 print('yelp done')
+
 # Facebook update
 for each in fb_ids:
 	fb_id = each
