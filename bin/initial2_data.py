@@ -21,7 +21,7 @@ import facebook
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
-all_restaurants = db.AllRestaurants
+all_restaurants = db.all_restaurants
 
 # from IPython import embed; embed()
 

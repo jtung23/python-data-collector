@@ -117,7 +117,7 @@ for val in headers:
 pp.pprint(final)
 # # from IPython import embed; embed()
 
-all_restaurants = db.AllRestaurants
+all_restaurants = db.all_restaurants
 
 for data in final:
 	all_restaurants.update_one({'yelpId': data['yelpId']},

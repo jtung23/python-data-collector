@@ -20,7 +20,7 @@ graph = facebook.GraphAPI(access_token=access_token,
 	version = 2.7)
 
 
-all_restaurants = db.AllRestaurants
+all_restaurants = db.all_restaurants
 
 restaurants = list(all_restaurants.find())
 
