@@ -3,7 +3,3 @@ pymongo==3.6.0
 urllib3==1.22
 facebook-sdk==2.0.0
 ipython==6.2.1
-
-django
-gunicorn
-django-heroku
