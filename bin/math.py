@@ -9,10 +9,10 @@
 
 import json
 import requests
-
+import statistics
 import pymongo
 from pymongo import MongoClient
-
+import numpy
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -27,33 +27,44 @@ restaurants = list(all_restaurants.find())
 
 pp.pprint(restaurants)
 all_data = []
-rating_count = []
-reviews = []
 
 # makes array of all checkins, rating count, and reviews 
 for each in restaurants:
-	obj = {
+	all_data.append({
 		'fbId': each['fbId'],
 		'yelpId': each['yelpId'],
 		'checkins': each['checkins'],
 		'rating_count': each['rating_count'],
 		'reviews': each['reviews']
-	}
-	all_data.append(obj)
-# pp.pprint(all_data)
+	})
 
-# for each in all_data:
 
-# gets difference for last 3 days
-# # finds difference
-def difference (range, array):
-	count = 0
-	while count < range:
-		pass
-		for each in reversed(array):
-			power = len(suffixes) - index
-			print(index)
-			pp.pprint(power)
-			c
+# # finds difference for days depending on param
+def difference (numb, data_filter):
+	print(numpy.diff(all_data[0][data_filter]))
+	# for each in all_data:
+	# 	data = each[data_filter][::-1]
+	# 	count = 0
+	# 	stats = []
 
-difference(3,all_data[0])
+	# 	while count < numb:
+	# 		stats.append(data[count][data_filter])
+	# 		mean = statistics.mean(stats)
+	# 		median = statistics.median(stats)
+	# 		mode = statistics.mode(stats)
+	# 		obj = {
+	# 			numb + "_days": {
+	# 				'mean':
+	# 				'median':
+	# 				'mode':
+	# 			}	
+	# 		}
+	# 		count = count + 1
+
+	# for i, value in enumerate(new_list['checkins']):
+	# 	while i < 3:
+	# 		print(i)
+	# 		pp.pprint(value)
+	# while count < numb:
+
+difference(3,'checkins')
