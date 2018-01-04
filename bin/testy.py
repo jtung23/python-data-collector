@@ -162,4 +162,4 @@ for data in headers:
 	test_collection.update_one({'yelpId': data['yelpId']},
 		{"$set":data}, upsert=True)
 print(test_collection.count())
-from IPython import embed; embed()
+# from IPython import embed; embed()
