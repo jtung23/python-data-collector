@@ -51,7 +51,7 @@ for each in yelp_ids:
 		headers={
 			"Authorization": 'Bearer Dt0X2kf0ef_hQ5Jc_5FNnxheSlXdFX1-svTZE6AJP0J4lBoVuMFRl66QgPFblxpMN-_AHN9OL3mek81qVap7DEtTMK2MrXxXpTxV31SVTbe-qajxmCEGj_nHwuEuWnYx'
 			}).json()
-	all_ids.find_one_and_update({
+	test_collection.find_one_and_update({
 		'yelpId': r['id']
 		},
 		{'$push': {
@@ -70,7 +70,7 @@ for each in fb_ids:
 	fb_id = each
 	search_link= fb_id + '?fields=name,rating_count,checkins'
 	restaurants = graph.request(search_link)
-	all_ids.find_one_and_update({
+	test_collection.find_one_and_update({
 		'fbId': restaurants['id']
 	},
 	{
