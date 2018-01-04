@@ -1,11 +1,17 @@
 import os
 from flask import Flask
+import socket
+from socket import AF_INET, SOCK_DGRAM
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
     return 'Hello World!'
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
