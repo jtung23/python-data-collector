@@ -87,7 +87,7 @@ print('fb done')
 # 
 # GETS NEW FIRMS AND ADDS TO RESTAURANT COLLECTION
 # 
-
+print('start add new')
 # finds missing Id that needs to be added to all_restaurant
 yelp_ids = []
 test_ids = []
@@ -157,5 +157,6 @@ pp.pprint(headers)
 for data in headers:
 	all_restaurants.update_one({'yelpId': data['yelpId']},
 		{"$set":data}, upsert=True)
+print('added new')
 print(all_restaurants.count())
 # from IPython import embed; embed()
