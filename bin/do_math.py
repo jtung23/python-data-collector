@@ -15,33 +15,37 @@ from pymongo import MongoClient
 import numpy
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
+from itertools import islice
 import datetime
 now = datetime.datetime.utcnow()
 
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
-all_restaurants = db.all_restaurants
-restaurants = list(all_restaurants.find())
-
-pp.pprint(restaurants)
-all_data = []
-
-# makes array of all checkins, rating count, and reviews 
-for each in restaurants:
-	all_data.append({
-		'fbId': each['fbId'],
-		'yelpId': each['yelpId'],
-		'checkins': each['checkins'],
-		'rating_count': each['rating_count'],
-		'reviews': each['reviews']
-	})
+# returns the different values in list
+# for each dict in list, find difference
+# between value and value+1
+# then save value+1 date
+def seperate_count(seq, filter):
+	pp.pprint(seq)
+	return [i[filter] for i in seq if i[filter]]
 
 
-# # finds difference for days depending on param
-def difference (numb, data_filter):
-	print(numpy.diff(all_data[0][data_filter]))
+def difference(arr):
+	pp.pprint(arr)
+	checkins = numpy.diff(seperate_count(arr['checkins'], 'checkins'))
+	ratings = numpy.diff(seperate_count(arr['rating_count'], 'rating_count'))
+	reviews = numpy.diff(seperate_count(arr['reviews'], 'review_count'))
+
+	data = {
+		'fbId': arr['fbId'],
+		'yelpId': arr['yelpId'],
+		'checkins': checkins,
+		'rating_count': ratings,
+		'reviews': reviews
+	}
+	return data
+	
 	# for each in all_data:
 	# 	data = each[data_filter][::-1]
 	# 	count = 0
@@ -67,4 +71,25 @@ def difference (numb, data_filter):
 	# 		pp.pprint(value)
 	# while count < numb:
 
-difference(3,'checkins')
+all_restaurants = db.all_restaurants
+restaurants = list(all_restaurants.find())
+
+all_data = []
+
+# makes array of all checkins, rating count, and reviews 
+for each in restaurants:
+	all_data.append({
+		'fbId': each['fbId'],
+		'yelpId': each['yelpId'],
+		'checkins': each['checkins'],
+		'rating_count': each['rating_count'],
+		'reviews': each['reviews']
+	})
+diff_data = []
+
+for data in all_data:
+	pp.pprint(data)
+	obj_diff = difference(data)
+	diff_data.append(obj_diff)
+
+pp.pprint(diff_data)

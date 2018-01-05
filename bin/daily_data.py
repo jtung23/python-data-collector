@@ -133,13 +133,13 @@ for value in missing_id:
 			'overall_star_rating': firms.get('overall_star_rating'),
 			'query_date': str(now)
 		}
-	],
+	]
 	dat['rating_count']=[
 		{
 		'rating_count': firms['rating_count'],
 		'query_date': str(now)
 		}
-	],
+	]
 	dat['categories']= r['categories']
 	dat['phone']= r['display_phone']
 	dat['yelpURL']= r['url']
