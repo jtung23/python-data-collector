@@ -1,44 +1,9 @@
-# Python: Getting Started
+# Trending Restaurants Data Collection Scripts
 
-A barebones Django app, which can easily be deployed to Heroku.
+These files were created for the initial data collection and used daily by the Trending Restaurant App.
+[Repository](https://github.com/D-J-Trending/trending-restaurants)
+[Website](https://trendingappworking.herokuapp.com/)
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+daily_data.py is used to update certain fields in the mLab database used by Trending Restaurants as well as add new restaurants if the user added new restaurants.
 
-## Running Locally
-
-Make sure you have Python [installed properly](http://install.python-guide.org). Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
-
-```sh
-$ git clone git@github.com:heroku/python-getting-started.git
-$ cd python-getting-started
-
-$ pipenv install
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku master
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+do_math.py is used daily as well to calculate the score using our propriety algorithm. This data is inserted into the appropriate document for usage on the front-end to show which restaurants are the trendiest.
