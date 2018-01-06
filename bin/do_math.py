@@ -78,6 +78,7 @@ def difference(arr):
 	return data
 
 all_restaurants = db.all_restaurants
+test_collection = db.test_collection
 restaurants = list(all_restaurants.find())
 
 all_data = []
@@ -102,13 +103,13 @@ for data in all_data:
 # total = weeklychange / previous7sum
 # checkins total, ratings total, reviews total
 
-def find_velocity(perc_list):
+def find_velocity(perc_list, second, third):
 	# reverses percentage list
 	rev_checkins = perc_list[::-1]
 	# gets last 7 days sum
-	recent_sum = sum_list(rev_checkins, None, 7)
+	recent_sum = sum_list(rev_checkins, None, second)
 	# gets days 7 to 14 sum
-	previous_sum = sum_list(rev_checkins, 7, 14)
+	previous_sum = sum_list(rev_checkins, second, third)
 	weekly_change = recent_sum - previous_sum
 
 	if weekly_change == 0.0 or previous_sum == 0.0:
@@ -123,54 +124,30 @@ for this in diff_data:
 	rating_perc = this['rating_count']['percent_change']
 	review_perc = this['reviews']['percent_change']
 
-	checkin_vel = find_velocity(checkin_perc)
-	rating_vel = find_velocity(rating_perc)
-	review_vel = find_velocity(review_perc)
+	checkin_vel7 = find_velocity(checkin_perc, 7, 14)
+	rating_vel7 = find_velocity(rating_perc, 7, 14)
+	review_vel7 = find_velocity(review_perc, 7, 14)
+
+	checkin_vel14 = find_velocity(checkin_perc, 14, 28)
+	rating_vel14 = find_velocity(rating_perc, 14, 28)
+	review_vel14 = find_velocity(review_perc, 14, 28)
 
 	score = {
-		'yelpId': this['yelpId'],
-		'7day': {
-			'checkins': checkin_vel,
-			'rating_count': rating_vel,
-			'review_count': review_vel
+		'trending_score': {
+			'7day': {
+				'checkins': checkin_vel7,
+				'rating_count': rating_vel7,
+				'review_count': review_vel7
+			},
+			'14day': {
+				'checkins': checkin_vel14,
+				'rating_count': rating_vel14,
+				'review_count': review_vel14
+			},
+			'updated_on': str(now)
 		}
+
 	}
 	pp.pprint(score)
-
-
-# end product:
-# score: {
-# 	7day: {
-# 		'checkins':
-# 		'review_count':
-# 		'rating_count':
-#	}
-# }
-from IPython import embed; embed()
-
-
-
-# for each in all_data:
-# 	data = each[data_filter][::-1]
-# 	count = 0
-# 	stats = []
-
-# 	while count < numb:
-# 		stats.append(data[count][data_filter])
-# 		mean = statistics.mean(stats)
-# 		median = statistics.median(stats)
-# 		mode = statistics.mode(stats)
-# 		obj = {
-# 			numb + "_days": {
-# 				'mean':
-# 				'median':
-# 				'mode':
-# 			}	
-# 		}
-# 		count = count + 1
-
-# for i, value in enumerate(new_list['checkins']):
-# 	while i < 3:
-# 		print(i)
-# 		pp.pprint(value)
-# while count < numb:
+	all_restaurants.update_one({'yelpId': this['yelpId']},
+		{"$set":score})
