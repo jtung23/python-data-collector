@@ -21,29 +21,28 @@ graph = facebook.GraphAPI(access_token=access_token,
 
 
 all_restaurants = db.all_restaurants
-all_ids = db.all_ids
-
 
 # # gets data from all_ids. adds initial data
 # allids = list(all_ids.find())
 restaurants = list(all_restaurants.find())
 
+all_ids = []
+for val in restaurants:
+	all_ids.append({'yelpId': val['yelpId'], 'fbId': val['fbId']})
+pp.pprint(all_ids)
 # result = all_restaurants.find({'rating_count[0][0]': {
 # 		'rating_count': {'$gte': 0}
 # 	}
 # })
 # print(list(result))
-id_arr = []
-for the in restaurants:
-	if (len(the['rating_count']) == 2):
-		pp.pprint(the['yelpId'])
-		id_arr.append(the['yelpId'])
-print(id_arr)
+# for the in restaurants:
+# 	pp.pprint
+# print(id_arr)
 
-for each in id_arr:
-	result = all_restaurants.delete_one({'yelpId': each})
-	print(result.deleted_count)
-	print(all_restaurants.count())
+# for each in id_arr:
+# 	result = all_restaurants.delete_one({'yelpId': each})
+# 	print(result.deleted_count)
+# 	print(all_restaurants.count())
 # pp.pprint([each['name'] for each in restaurants if len(each['rating_count'][0][0]) == 1])
 	
 # print('start add new')
