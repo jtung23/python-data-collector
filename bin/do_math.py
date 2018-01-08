@@ -18,10 +18,13 @@ pp = pprint.PrettyPrinter(indent=4)
 from itertools import islice
 import datetime
 now = datetime.datetime.utcnow()
+from operator import itemgetter, attrgetter, methodcaller
 
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
+all_restaurants = db.all_restaurants
+test_collection = db.test_collection
 # returns the different values in list
 # for each dict in list, find difference
 # between value and value+1
@@ -77,8 +80,6 @@ def difference(arr):
 	}
 	return data
 
-all_restaurants = db.all_restaurants
-test_collection = db.test_collection
 restaurants = list(all_restaurants.find())
 
 all_data = []
@@ -148,6 +149,28 @@ for this in diff_data:
 		}
 
 	}
-	pp.pprint(score)
+
 	all_restaurants.update_one({'yelpId': this['yelpId']},
 		{"$set":score})
+
+restaurants = list(all_restaurants.find())
+pp.pprint(restaurants)
+doobie = []
+for bam in restaurants:
+	doobie.append({
+		'yelpId': bam['yelpId'],
+		'score': bam['trending_score']['7day']['checkins']
+	})
+
+# replace all scores with 'None' with 0.0 to sort
+replaced_none = [{'score': 0.0, 'yelpId':x['yelpId']} if x['score'] is None else x for x in doobie]
+# have array of scores, now sort by score
+sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True)
+
+for i, scores in enumerate(sorted_score_list):
+	scores['rank'] = i + 1
+pp.pprint(sorted_score_list)
+
+for final in sorted_score_list:
+	all_restaurants.update_one({'yelpId': final['yelpId']},
+		{"$set":final})
