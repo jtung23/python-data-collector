@@ -89,15 +89,18 @@ print('fb done')
 # 
 print('start add new')
 # finds missing Id that needs to be added to all_restaurant
-yelp_ids = []
+new_ids = []
 all_restaurant_ids = []
 for datum in allids:
-	yelp_ids.append({'yelpId': datum['yelpId'], 'fbId': datum['fbId']})
+	new_ids.append({'yelpId': datum['yelpId'], 'fbId': datum['fbId']})
+
+restaurants = list(all_restaurants.find())
+pp.pprint(restaurants)
 for val in restaurants:
 	all_restaurant_ids.append({'yelpId': val['yelpId'], 'fbId': val['fbId']})
 
 # gets array of ids that need to be added to collection
-missing_id =list(filter(lambda x: x not in all_restaurant_ids, yelp_ids))
+missing_id =list(filter(lambda x: x not in all_restaurant_ids, new_ids))
 
 headers = []
 
