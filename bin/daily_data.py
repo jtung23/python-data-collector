@@ -71,28 +71,28 @@ print('yelp update done')
 # Facebook update
 for each in fb_ids:
 	fb_id = each
-	search_link= fb_id + '?fields=name,rating_count,checkins'
-	restaurants = graph.request(search_link)
+	search_link= fb_id + '?fields=name,rating_count,checkins,overall_star_rating'
+	fb_res = graph.request(search_link)
 	all_restaurants.find_one_and_update({
-		'fbId': restaurants['id']
+		'fbId': fb_res['id']
 	},
 	{
 		'$push': {
 			'rating_count': {
-				'rating_count': restaurants['rating_count'],
+				'rating_count': fb_res['rating_count'],
 				'query_date': str(now)
 			},
 			'checkins': {
-				'checkins': restaurants['checkins'],
+				'checkins': fb_res['checkins'],
 				'query_date': str(now)
 			},
-		},
-		'$set': {
-			'star_rating': {
-				'overall_star_rating': r['overall_star_rating'],
-				'query_date': str(now)
-				}
 		}
+		# '$set': {
+		# 	'star_rating': {
+		# 		'overall_star_rating': fb_res['overall_star_rating'],
+		# 		'query_date': str(now)
+		# 		}
+		# }
 	})
 
 print('fb done')
@@ -107,9 +107,9 @@ all_restaurant_ids = []
 for datum in allids:
 	new_ids.append({'yelpId': datum['yelpId'], 'fbId': datum['fbId']})
 
-restaurants = list(all_restaurants.find())
-pp.pprint(restaurants)
-for val in restaurants:
+new_restaurants = list(all_restaurants.find())
+pp.pprint(new_restaurants)
+for val in new_restaurants:
 	all_restaurant_ids.append({'yelpId': val['yelpId'], 'fbId': val['fbId']})
 
 # gets array of ids that need to be added to collection

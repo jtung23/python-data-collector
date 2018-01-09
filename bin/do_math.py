@@ -150,11 +150,11 @@ for this in diff_data:
 
 	}
 
-	# all_restaurants.update_one({'yelpId': this['yelpId']},
-	# 	{"$set":score})
+	all_restaurants.update_one({'yelpId': this['yelpId']},
+		{"$set":score})
+print('score updated')
 
 restaurants = list(all_restaurants.find())
-pp.pprint(restaurants)
 doobie = []
 for bam in restaurants:
 	doobie.append({
@@ -170,10 +170,8 @@ sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True
 
 for i, scores in enumerate(sorted_score_list):
 	scores['rank'] = i + 1
-pp.pprint(sorted_score_list)
 for nones in none_list:
 	nones['rank'] = 'Not Enough Data'
-pp.pprint(none_list)
 
 for final in sorted_score_list:
 	all_restaurants.update_one({'yelpId': final['yelpId']},
@@ -182,3 +180,4 @@ for final in sorted_score_list:
 for fin in none_list:
 	all_restaurants.update_one({'yelpId': final['yelpId']},
 		{"$set":fin})
+print('do math completed')

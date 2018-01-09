@@ -21,24 +21,25 @@ graph = facebook.GraphAPI(access_token=access_token,
 	version = 2.7)
 
 all_restaurants = db.all_restaurants
+test_collection = db.test_collection
 restaurants = list(all_restaurants.find())
+test = list(test_collection.find())
+# all_links = []
+# for item in restaurants:
+# 	place_id = item['fbId']
+# 	search_link= place_id + '?fields=name,link'
+# 	links = graph.request(search_link)
+# 	all_links.append({
+# 		'fbId': item['fbId'],
+# 		'name': links['name'],
+# 		'link': links['link']
+# 	})
+# pp.pprint(all_links)
+# print(len(all_links))
 
-all_links = []
-for item in restaurants:
-	place_id = item['fbId']
-	search_link= place_id + '?fields=name,link'
-	links = graph.request(search_link)
-	all_links.append({
-		'fbId': item['fbId'],
-		'name': links['name'],
-		'link': links['link']
-	})
-pp.pprint(all_links)
-print(len(all_links))
-
-for these in all_links:
-	all_restaurants.update_one({'fbId': these['fbId']},
-		{'$set': {'fb_url': these['link']}}
+for these in restaurants:
+	test_collection.update_one({'fbId': these['fbId']},
+		{'$set': these}, upsert=True
 	)
-pp.pprint(restaurants)
+pp.pprint(test)
 from IPython import embed; embed()

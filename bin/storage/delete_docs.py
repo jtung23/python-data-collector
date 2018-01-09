@@ -20,10 +20,15 @@ graph = facebook.GraphAPI(access_token=access_token,
 	version = 2.7)
 
 
-all_restaurants = db.all_restaurants
+test_collection = db.test_collection
 
-restaurants = (list(all_restaurants.find()))
+restaurants = list(all_restaurants.find())
 
+wrong_dates = list(all_restaurants.find({
+	'checkins': {'$elemMatch': {'query_date': '2018-01-09 17:59:59.352266'}}  
+	})
+)
+pp.pprint(wrong_dates)
 # from IPython import embed; embed()
 # 	pp.pprint(modified_checks)
 # for each in restaurants:
