@@ -16,24 +16,29 @@ import facebook
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
+access_token= 'EAAdISGCRkqMBABL06kxKZAQIdeGYOXi8BAoUoeqo22JzsJTKLNToOZATMorNQZB82ztrj0dCqqSUggHgUBXpQvRAK6lSi5PODzw0mIxDaT0Vaq1Mu2jQMj1kJDNbu8livWAkNnc4DFYN1OZBvMykelie2lZA4uUwZD'
+graph = facebook.GraphAPI(access_token=access_token, 
+	version = 2.7)
+
 all_restaurants = db.all_restaurants
 restaurants = list(all_restaurants.find())
 
-ids = []
-for each in restaurants:
-	ids.append({
-		'fbId':each['fbId'],
-		'yelpId': each['yelpId']
+all_links = []
+for item in restaurants:
+	place_id = item['fbId']
+	search_link= place_id + '?fields=name,link'
+	links = graph.request(search_link)
+	all_links.append({
+		'fbId': item['fbId'],
+		'name': links['name'],
+		'link': links['link']
 	})
+pp.pprint(all_links)
+print(len(all_links))
 
-all_ids = db.all_ids
-
-for data in ids:
-	all_ids.update_one(
-		{'fbId': data['fbId']},
-		{'$set': data},
-		upsert=True
+for these in all_links:
+	all_restaurants.update_one({'fbId': these['fbId']},
+		{'$set': {'fb_url': these['link']}}
 	)
-print(all_ids.count())
-# from IPython import embed; embed()
-
+pp.pprint(restaurants)
+from IPython import embed; embed()

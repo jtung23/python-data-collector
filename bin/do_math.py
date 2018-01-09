@@ -150,8 +150,8 @@ for this in diff_data:
 
 	}
 
-	all_restaurants.update_one({'yelpId': this['yelpId']},
-		{"$set":score})
+	# all_restaurants.update_one({'yelpId': this['yelpId']},
+	# 	{"$set":score})
 
 restaurants = list(all_restaurants.find())
 pp.pprint(restaurants)
@@ -163,14 +163,22 @@ for bam in restaurants:
 	})
 
 # replace all scores with 'None' with 0.0 to sort
-replaced_none = [{'score': 0.0, 'yelpId':x['yelpId']} if x['score'] is None else x for x in doobie]
+none_list = [x for x in doobie if x['score'] == None]
+replaced_none = [x for x in doobie if x['score'] != None]
 # have array of scores, now sort by score
 sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True)
 
 for i, scores in enumerate(sorted_score_list):
 	scores['rank'] = i + 1
 pp.pprint(sorted_score_list)
+for nones in none_list:
+	nones['rank'] = 'Not Enough Data'
+pp.pprint(none_list)
 
 for final in sorted_score_list:
 	all_restaurants.update_one({'yelpId': final['yelpId']},
 		{"$set":final})
+
+for fin in none_list:
+	all_restaurants.update_one({'yelpId': final['yelpId']},
+		{"$set":fin})

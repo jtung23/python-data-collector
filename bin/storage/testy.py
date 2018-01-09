@@ -19,158 +19,89 @@ from itertools import islice
 import datetime
 now = datetime.datetime.utcnow()
 from operator import itemgetter, attrgetter, methodcaller
+import facebook
 
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
-all_restaurants = db.all_restaurants
+
 test_collection = db.test_collection
-# returns the different values in list
-# for each dict in list, find difference
-# between value and value+1
-# then save value+1 date
-def sum_list(arr,first, last):
-	sum = 0
-	for x in arr[first:last]:
-		int_x = float(x)
-		sum += int_x
-	return sum
+all_ids = db.all_ids
 
-def seperate_count(seq, filter):
-	return [i[filter] for i in seq if i[filter]]
+# gets data from all_ids. adds initial data
+allids = list(all_ids.find())
+restaurants = list(test_collection.find())
 
-def percent_change(diff, totals):
-	# divide diff[i] by totals[i]
-	perc_change_list = []
-	for i,each in enumerate(diff):
-		percent = each/totals[i]
-		perc_change_list.append(format(percent, '.6f'))
-	return perc_change_list
-
-def difference(arr):
-	# seperates count into array
-	checkins = seperate_count(arr['checkins'], 'checkins')
-	ratings = seperate_count(arr['rating_count'], 'rating_count')
-	reviews = seperate_count(arr['reviews'], 'review_count')
-
-	# finds difference
-	checkins_diff = list(numpy.diff(checkins))
-	ratings_diff = list(numpy.diff(ratings))
-	reviews_diff = list(numpy.diff(reviews))
-
-	# finds %change, diff / total
-	checkins_percent = percent_change(checkins_diff, checkins)
-	ratings_percent = percent_change(ratings_diff, ratings)
-	reviews_percent = percent_change(reviews_diff, reviews)
-	data = {
-		'fbId': arr['fbId'],
-		'yelpId': arr['yelpId'],
-		'checkins': {
-			'difference': checkins_diff,
-			'percent_change': checkins_percent
-		},
-		'rating_count': {
-			'difference': ratings_diff,
-			'percent_change': ratings_percent
-		},
-		'reviews': {
-			'difference': reviews_diff,
-			'percent_change': reviews_percent
-		}
-	}
-	return data
-
-restaurants = list(all_restaurants.find())
-
-all_data = []
-
-# makes array of all checkins, rating count, and reviews 
+yelp_ids = []
 for each in restaurants:
-	all_data.append({
-		'fbId': each['fbId'],
-		'yelpId': each['yelpId'],
-		'checkins': each['checkins'],
-		'rating_count': each['rating_count'],
-		'reviews': each['reviews']
-	})
-diff_data = []
+	yelp_ids.append(each['yelpId'])
 
-for data in all_data:
-	obj_diff = difference(data)
-	diff_data.append(obj_diff)
+fb_ids = []
 
-# add last 7 percentchanges together, then
-# weeklychange = recent 7 - previous 7
-# total = weeklychange / previous7sum
-# checkins total, ratings total, reviews total
+access_token= 'EAAdISGCRkqMBABL06kxKZAQIdeGYOXi8BAoUoeqo22JzsJTKLNToOZATMorNQZB82ztrj0dCqqSUggHgUBXpQvRAK6lSi5PODzw0mIxDaT0Vaq1Mu2jQMj1kJDNbu8livWAkNnc4DFYN1OZBvMykelie2lZA4uUwZD'
+graph = facebook.GraphAPI(access_token=access_token, 
+	version = 2.7)
 
-def find_velocity(perc_list, second, third):
-	# reverses percentage list
-	rev_checkins = perc_list[::-1]
-	# gets last 7 days sum
-	recent_sum = sum_list(rev_checkins, None, second)
-	# gets days 7 to 14 sum
-	previous_sum = sum_list(rev_checkins, second, third)
-	weekly_change = recent_sum - previous_sum
+# from IPython import embed; embed()
 
-	if weekly_change == 0.0 or previous_sum == 0.0:
-		velocity = None
-	else:
-		velocity = weekly_change/previous_sum
-	return velocity
+for each in restaurants:
+	fb_ids.append(each['fbId'])
 
-for this in diff_data:
-
-	checkin_perc = this['checkins']['percent_change']
-	rating_perc = this['rating_count']['percent_change']
-	review_perc = this['reviews']['percent_change']
-
-	checkin_vel7 = find_velocity(checkin_perc, 7, 14)
-	rating_vel7 = find_velocity(rating_perc, 7, 14)
-	review_vel7 = find_velocity(review_perc, 7, 14)
-
-	checkin_vel14 = find_velocity(checkin_perc, 14, 28)
-	rating_vel14 = find_velocity(rating_perc, 14, 28)
-	review_vel14 = find_velocity(review_perc, 14, 28)
-
-	score = {
-		'trending_score': {
-			'7day': {
-				'checkins': checkin_vel7,
-				'rating_count': rating_vel7,
-				'review_count': review_vel7
-			},
-			'14day': {
-				'checkins': checkin_vel14,
-				'rating_count': rating_vel14,
-				'review_count': review_vel14
-			},
-			'updated_on': str(now)
+# Yelp update
+updated_list = []
+for each in yelp_ids:
+	yelp_id = each
+	r = requests.get(
+		'https://api.yelp.com/v3/businesses/' + yelp_id, 
+		headers={
+			"Authorization": 'Bearer Dt0X2kf0ef_hQ5Jc_5FNnxheSlXdFX1-svTZE6AJP0J4lBoVuMFRl66QgPFblxpMN-_AHN9OL3mek81qVap7DEtTMK2MrXxXpTxV31SVTbe-qajxmCEGj_nHwuEuWnYx'
+			}).json()
+	test_collection.find_one_and_update({
+		'yelpId': r['id']
+		},
+		{
+			'$push': {
+				'reviews': {
+					'review_count': r['review_count'],
+					'query_date': str(now)
+					}
+				},
+			'$set': {
+					'rating': {
+						'rating': r['rating'],
+						'query_date': str(now)
+					}
+			}
 		}
+	)
 
-	}
+print('yelp update done')
 
-	all_restaurants.update_one({'yelpId': this['yelpId']},
-		{"$set":score})
-
-restaurants = list(all_restaurants.find())
-pp.pprint(restaurants)
-doobie = []
-for bam in restaurants:
-	doobie.append({
-		'yelpId': bam['yelpId'],
-		'score': bam['trending_score']['7day']['checkins']
+# Facebook update
+for each in fb_ids:
+	fb_id = each
+	search_link= fb_id + '?fields=name,rating_count,checkins'
+	restaurants = graph.request(search_link)
+	test_collection.find_one_and_update({
+		'fbId': restaurants['id']
+	},
+	{
+		'$push': {
+			'rating_count': {
+				'rating_count': restaurants['rating_count'],
+				'query_date': str(now)
+			},
+			'checkins': {
+				'checkins': restaurants['checkins'],
+				'query_date': str(now)
+			},
+		},
+		'$set': {
+			'star_rating': {
+				'overall_star_rating': r['overall_star_rating'],
+				'query_date': str(now)
+				}
+		}
 	})
 
-# replace all scores with 'None' with 0.0 to sort
-replaced_none = [{'score': 0.0, 'yelpId':x['yelpId']} if x['score'] is None else x for x in doobie]
-# have array of scores, now sort by score
-sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True)
-
-for i, scores in enumerate(sorted_score_list):
-	scores['rank'] = i + 1
-pp.pprint(sorted_score_list)
-
-for final in sorted_score_list:
-	all_restaurants.update_one({'yelpId': final['yelpId']},
-		{"$set":final})
+print('fb done')

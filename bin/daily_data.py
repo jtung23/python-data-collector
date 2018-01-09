@@ -15,7 +15,7 @@ import facebook
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
-access_token= 'EAAG0XCqokvMBADXjKrYtgQtp6E1PCWuUOXJ1ZBCOs1rGwp4tBOzJR0IcndbZAH83g3PGhZASgNmuvt0YEPafpCMzX6civGEQOHg8DWIgDILaniCbmnyTwmyDHbVbR53OEEbLT8c9AZBKy01THwgLCGTl3xZB1Xc8XpV5lNDsTogZDZD'
+access_token= 'EAAdISGCRkqMBABL06kxKZAQIdeGYOXi8BAoUoeqo22JzsJTKLNToOZATMorNQZB82ztrj0dCqqSUggHgUBXpQvRAK6lSi5PODzw0mIxDaT0Vaq1Mu2jQMj1kJDNbu8livWAkNnc4DFYN1OZBvMykelie2lZA4uUwZD'
 graph = facebook.GraphAPI(access_token=access_token, 
 	version = 2.7)
 
@@ -50,13 +50,20 @@ for each in yelp_ids:
 	all_restaurants.find_one_and_update({
 		'yelpId': r['id']
 		},
-		{'$push': {
-			'reviews': {
-				'review_count': r['review_count'],
-				'query_date': str(now)
+		{
+			'$push': {
+				'reviews': {
+					'review_count': r['review_count'],
+					'query_date': str(now)
+					}
+				},
+			'$set': {
+					'rating': {
+						'rating': r['rating'],
+						'query_date': str(now)
+					}
 			}
-		}}
-		# '$set': {'rating': value['rating']}
+		}
 	)
 
 print('yelp update done')
@@ -78,7 +85,13 @@ for each in fb_ids:
 			'checkins': {
 				'checkins': restaurants['checkins'],
 				'query_date': str(now)
-			}
+			},
+		},
+		'$set': {
+			'star_rating': {
+				'overall_star_rating': r['overall_star_rating'],
+				'query_date': str(now)
+				}
 		}
 	})
 
