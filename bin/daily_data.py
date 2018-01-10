@@ -59,7 +59,7 @@ for each in yelp_ids:
 				},
 			'$set': {
 					'rating': {
-						'rating': r['rating'],
+						'rating': r.get('rating'),
 						'query_date': str(now)
 					}
 			}
@@ -86,13 +86,13 @@ for each in fb_ids:
 				'checkins': fb_res['checkins'],
 				'query_date': str(now)
 			},
+		},
+		'$set': {
+			'star_rating': {
+				'overall_star_rating': fb_res.get('overall_star_rating'),
+				'query_date': str(now)
+				}
 		}
-		# '$set': {
-		# 	'star_rating': {
-		# 		'overall_star_rating': fb_res['overall_star_rating'],
-		# 		'query_date': str(now)
-		# 		}
-		# }
 	})
 
 print('fb done')
@@ -113,7 +113,17 @@ for val in new_restaurants:
 	all_restaurant_ids.append({'yelpId': val['yelpId'], 'fbId': val['fbId']})
 
 # gets array of ids that need to be added to collection
-missing_id =list(filter(lambda x: x not in all_restaurant_ids, new_ids))
+missing_id = []
+all_ids_cut = {x['yelpId']: x for x in all_restaurant_ids}
+for item in new_ids:
+    if item['yelpId'] not in all_ids_cut:
+        missing_id.append(item)
+    else:
+        pass  # whatever
+
+# # missing_id =list(filter(lambda x: x not in all_restaurant_ids, new_ids))
+
+pp.pprint(missing_id)
 
 headers = []
 
