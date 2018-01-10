@@ -159,25 +159,36 @@ doobie = []
 for bam in restaurants:
 	doobie.append({
 		'yelpId': bam['yelpId'],
+		'rank': bam['rank'],
+		'checkins': bam['checkins'],
 		'score': bam['trending_score']['7day']['checkins']
 	})
 
 # replace all scores with 'None' with 0.0 to sort
-none_list = [x for x in doobie if x['score'] == None]
+none_list = [x for x in doobie if len(x['checkins']) <= 10]
+
 replaced_none = [x for x in doobie if x['score'] != None]
 # have array of scores, now sort by score
 sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True)
 
 for i, scores in enumerate(sorted_score_list):
-	scores['rank'] = i + 1
+	scores['new_rank'] = i + 1
 for nones in none_list:
 	nones['rank'] = 'Not Enough Data'
 
 for final in sorted_score_list:
 	all_restaurants.update_one({'yelpId': final['yelpId']},
-		{"$set":final})
+		{"$set": {
+			'previous_rank': final['rank'],
+			'new_rank': final['new_rank']
+		}
+	})
 
 for fin in none_list:
-	all_restaurants.update_one({'yelpId': final['yelpId']},
-		{"$set":fin})
+	all_restaurants.update_one({'yelpId': fin['yelpId']},
+		{"$set": {
+			'previous_rank': fin['rank'],
+			'new_rank': fin['rank']
+		}
+	})
 print('do math completed')

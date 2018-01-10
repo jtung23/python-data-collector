@@ -25,7 +25,7 @@ all_ids = db.all_ids
 
 # gets data from all_ids. adds initial data
 allids = list(all_ids.find())
-restaurants = list(all_restaurants.find())
+restaurants = list(all_restaurants.find({'is_closed': False}))
 
 yelp_ids = []
 for each in restaurants:
@@ -61,7 +61,8 @@ for each in yelp_ids:
 					'rating': {
 						'rating': r.get('rating'),
 						'query_date': str(now)
-					}
+					},
+					'is_closed': r['is_closed']
 			}
 		}
 	)
@@ -91,7 +92,7 @@ for each in fb_ids:
 			'star_rating': {
 				'overall_star_rating': fb_res.get('overall_star_rating'),
 				'query_date': str(now)
-				}
+			}
 		}
 	})
 
@@ -129,7 +130,7 @@ headers = []
 
 for value in missing_id:
 	place_id = value['fbId']
-	search_link= place_id + '?fields=name,rating_count,checkins,overall_star_rating'
+	search_link= place_id + '?fields=name,rating_count,checkins,overall_star_rating,link'
 	firms = graph.request(search_link)
 
 	r = requests.get('https://api.yelp.com/v3/businesses/' + value['yelpId'], 
@@ -169,6 +170,8 @@ for value in missing_id:
 	dat['categories']= r['categories']
 	dat['phone']= r['display_phone']
 	dat['yelpURL']= r['url']
+	dat['fbURL']= firms['link']
+	dat['is_closed']=r['is_closed']
 	dat['yelpImg']= r['image_url']
 	dat['location']= {
 		'address': r['location']['address1'],
@@ -177,9 +180,8 @@ for value in missing_id:
 		'country': r['location']['country']
 	}
 	headers.append(dat)
-
-pp.pprint(headers)
-
+	
+print(all_restaurants.count())
 for data in headers:
 	all_restaurants.update_one({'yelpId': data['yelpId']},
 		{"$set":data}, upsert=True)

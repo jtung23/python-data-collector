@@ -21,30 +21,30 @@ graph = facebook.GraphAPI(access_token=access_token,
 
 
 all_restaurants = db.all_restaurants
+all_restaurants.update({}, {'$unset': {'fb_url': ""}} , multi=True);
+# allrest = (list(all_restaurants.find()))
+# # gets data from all_ids. adds initial data
+# # allids = list(all_ids.find())
+# restaurants = list(all_restaurants.find({
+# 	'reviews': {
+# 		'$elemMatch': {
+# 			'query_date': {
+# 				'$regex': '2018-01-09.*'
+# 			}
+# 		}
+# 	}
+# 	})
+# )
 
-allrest = (list(all_restaurants.find()))
-# gets data from all_ids. adds initial data
-# allids = list(all_ids.find())
-restaurants = list(all_restaurants.find({
-	'reviews': {
-		'$elemMatch': {
-			'query_date': {
-				'$regex': '2018-01-09.*'
-			}
-		}
-	}
-	})
-)
+# for each in restaurants:
+# 	# each['checkins'] = [x for x in each['checkins'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
+# 	# each['rating_count'] = [x for x in each['rating_count'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
+# 	each['reviews'] = [x for x in each['reviews'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
+# # pp.pprint(restaurants)
 
-for each in restaurants:
-	# each['checkins'] = [x for x in each['checkins'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
-	# each['rating_count'] = [x for x in each['rating_count'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
-	each['reviews'] = [x for x in each['reviews'] if '2018-01-09 13:00:40.621865' not in x['query_date']]
-# pp.pprint(restaurants)
-
-for each in restaurants:
-	all_restaurants.update_one({'yelpId': each['yelpId']},
-		{'$set': {'reviews': each['reviews']}}
-	)
+# for each in restaurants:
+# 	all_restaurants.update_one({'yelpId': each['yelpId']},
+# 		{'$set': {'reviews': each['reviews']}}
+	# )
 # pp.pprint(allrest)
 from IPython import embed; embed()
