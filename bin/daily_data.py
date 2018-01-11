@@ -109,7 +109,6 @@ for datum in allids:
 	new_ids.append({'yelpId': datum['yelpId'], 'fbId': datum['fbId']})
 
 new_restaurants = list(all_restaurants.find())
-pp.pprint(new_restaurants)
 for val in new_restaurants:
 	all_restaurant_ids.append({'yelpId': val['yelpId'], 'fbId': val['fbId']})
 
