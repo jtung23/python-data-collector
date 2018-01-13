@@ -152,14 +152,17 @@ for this in diff_data:
 
 	all_restaurants.update_one({'yelpId': this['yelpId']},
 		{"$set":score})
+	
 print('score updated')
 
-restaurants = list(all_restaurants.find())
+new_restaurants = list(all_restaurants.find())
+pp.pprint(new_restaurants)
 doobie = []
-for bam in restaurants:
+for bam in new_restaurants:
+	print(bam.get('new_rank'))
 	doobie.append({
 		'yelpId': bam['yelpId'],
-		'rank': bam['rank'],
+		'rank': bam.get('new_rank'),
 		'checkins': bam['checkins'],
 		'score': bam['trending_score']['7day']['checkins']
 	})
@@ -173,6 +176,7 @@ sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True
 
 for i, scores in enumerate(sorted_score_list):
 	scores['new_rank'] = i + 1
+
 for nones in none_list:
 	nones['rank'] = 'Not Enough Data'
 

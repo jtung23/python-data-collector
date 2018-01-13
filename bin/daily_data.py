@@ -166,6 +166,8 @@ for value in missing_id:
 		'query_date': str(now)
 		}
 	]
+	dat['new_rank'] = 'Not Enough Data',
+	dat['previous_rank'] = 'Not Enough Data',
 	dat['categories']= r['categories']
 	dat['phone']= r['display_phone']
 	dat['yelpURL']= r['url']
