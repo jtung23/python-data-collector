@@ -120,9 +120,11 @@ for item in new_ids:
         missing_id.append(item)
     else:
         pass  # whatever
-
-# # missing_id =list(filter(lambda x: x not in all_restaurant_ids, new_ids))
-
+final_missing = []
+# inputs into array if no match
+for ea in missing_id:
+	if not any(d['yelpId'] == ea['yelpId'] for d in final_missing):
+		final_missing.append(ea)
 pp.pprint(missing_id)
 
 headers = []

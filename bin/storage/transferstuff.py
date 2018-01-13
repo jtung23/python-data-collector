@@ -23,10 +23,22 @@ graph = facebook.GraphAPI(access_token=access_token,
 all_restaurants = db.all_restaurants
 test_collection = db.test_collection
 restaurants = list(all_restaurants.find({'is_closed': False}))
-test = list(all_restaurants.find({'is_closed': True}))
+# test = list(all_restaurants.find({'is_closed': True}))
 pp.pprint(len(restaurants))
-pp.pprint(len(test))
+# pp.pprint(len(test))
 all_links = []
+for item in restaurants:
+	place_id = item['fbId']
+	search_link= place_id + '?fields=name,link,about,description,engagement,restaurant_specialties'
+	links = graph.request(search_link)
+	all_links.append({
+		'name': links['name'],
+		'about': links.get('about'),
+		'description': links.get('description'),
+		'engagement': links.get('engagement'),
+		'restaurant_specialties': links.get('restaurant_specialties')
+		})
+pp.pprint(all_links)
 # for item in restaurants:
 # 	r = requests.get('https://api.yelp.com/v3/businesses/' + item['yelpId'], 
 # 		headers={"Authorization": 'Bearer Dt0X2kf0ef_hQ5Jc_5FNnxheSlXdFX1-svTZE6AJP0J4lBoVuMFRl66QgPFblxpMN-_AHN9OL3mek81qVap7DEtTMK2MrXxXpTxV31SVTbe-qajxmCEGj_nHwuEuWnYx'}).json()
