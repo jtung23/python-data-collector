@@ -1,8 +1,9 @@
 # Trending Restaurants Data Collection Scripts
 
-These files were created for the initial data collection and used daily by the Trending Restaurant App.
-[Repository](https://github.com/D-J-Trending/trending-restaurants)
-[Website](https://trendingappworking.herokuapp.com/)
+These files were created for the initial data collection and used daily by the Trending Restaurant App:
+
+>[Git Repo](https://github.com/D-J-Trending/trending-restaurants)
+>[Site](https://tregg.herokuapp.com/)
 
 daily_data.py is used to update certain fields in the mLab database used by Trending Restaurants as well as add new restaurants if the user added new restaurants.
 
