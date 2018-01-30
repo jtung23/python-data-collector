@@ -13,7 +13,7 @@ These files were created for the initial data collection and contain automated s
 Used to update certain fields in the mLab database used by Trending Restaurants as well as add new restaurants if the user added new restaurants.
 There are two databases, `all_restaurants` and `all_ids`. The first contains all of the collected data and restaurant information, the second contains all of the current ids and any that get added to the database from the user.
 
-	- Updating existing restaurants Facebook information. Using pythons `get()` to return null if the field does not exist.
+- Updating existing restaurants Facebook information. Using pythons `get()` to return null if the field does not exist.
 
 ```python
 # Facebook update
@@ -43,8 +43,9 @@ for each in fb_ids:
 		}
 	})
 ```
-	
-	- Adding a new restaurant to `all_restaurants` from `all_ids` if it doenst exist using dictionary comprehension and conditional statements.
+
+- Adding a new restaurant to `all_restaurants` from `all_ids` if it doenst exist using dictionary comprehension and conditional statements.
+
 ```python
 # gets array of ids that need to be added to collection
 missing_id = []
