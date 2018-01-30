@@ -1,13 +1,15 @@
 # Trending Restaurants Data Collection Scripts
 
+## Purpose
 These files were created for the initial data collection and contain automated scripts used daily by [Tregg](https://github.com/D-J-Trending/trending-restaurants) to analyze what restaurants are trending.
 
+## Links
 >[Git Repo](https://github.com/D-J-Trending/trending-restaurants)
 
 >[Site](https://tregg.herokuapp.com/)
 
 
-# Code
+## Code
 
 ### daily_data.py
 Used to update certain fields in the mLab database used by Trending Restaurants as well as add new restaurants if the user added new restaurants.
@@ -44,7 +46,7 @@ for each in fb_ids:
 	})
 ```
 
-- Adding a new restaurant to `all_restaurants` from `all_ids` if it doenst exist using dictionary comprehension and conditional statements.
+- Adding a new restaurant to `all_restaurants` collection from `all_ids` collection if it does not exist using dictionary comprehension and conditional statements.
 
 ```python
 # gets array of ids that need to be added to collection
@@ -64,3 +66,20 @@ for ea in missing_id:
 
 ### do_math.py
 Used daily to calculate the trending score and rank using our propriety algorithm. This data is inserted into the appropriate document for usage on the front-end to show which restaurants are the trendiest.
+
+-Utilizing list comprehension to efficiently filter and modify arrays. Then sorting and establishing a rank or lack of rank for each document in the collection.
+```python
+# replace all scores with 'None' with 0.0 to sort
+none_list = [x for x in doobie if len(x['checkins']) <= 10]
+
+replaced_none = [x for x in doobie if x['score'] != None]
+# have array of scores, now sort by score
+sorted_score_list = sorted(replaced_none , key=itemgetter('score'), reverse=True)
+
+for i, scores in enumerate(sorted_score_list):
+	scores['new_rank'] = i + 1
+
+for nones in none_list:
+	nones['rank'] = 'Not Enough Data'
+```
+
