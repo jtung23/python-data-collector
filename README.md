@@ -1,7 +1,10 @@
-# Trending Restaurants Data Collection Scripts
+# Tregg Data Collection Scripts
 
 ## Purpose
 These files were created for the initial data collection and contain automated scripts used daily by [Tregg](https://github.com/D-J-Trending/trending-restaurants) to analyze what restaurants are trending.
+
+Node was initially used but a large api call to Yelp and Facebook repeatedly returned errors due to the amount of async calls being made in the for loop.
+Switched over to Python due to the ability of finishing a task before moving on to the next, thus avoiding the error entirely.
 
 ## Links
 >[Git Repo](https://github.com/D-J-Trending/trending-restaurants)
