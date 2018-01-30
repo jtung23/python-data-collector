@@ -1,3 +1,7 @@
+# IGNORE THIS FILE
+# UNUSED, ALL RELEVANT FILES ARE IN THE 
+# BIN AND DATABASE DIRECTORIES
+
 import os
 from flask import Flask
 import socket
