@@ -15,7 +15,7 @@ import facebook
 client = MongoClient('mongodb://admin:bootcamp123@ds159776.mlab.com:59776/heroku_vg8qr96g')
 db = client.heroku_vg8qr96g
 
-access_token= 'EAAdISGCRkqMBABL06kxKZAQIdeGYOXi8BAoUoeqo22JzsJTKLNToOZATMorNQZB82ztrj0dCqqSUggHgUBXpQvRAK6lSi5PODzw0mIxDaT0Vaq1Mu2jQMj1kJDNbu8livWAkNnc4DFYN1OZBvMykelie2lZA4uUwZD'
+access_token= 'EAAG0XCqokvMBAKzko2vr4PDSRI0sELY5oHAoNHAs30ZBfUq4d1pehO3YlxgKwQOQW3rijsYBYroA5GLdjZAWiAwauJjgZBMwIHPoelULm7VoaFZB2RsFTv3Lw0lS4QlkZCVi16ZB7ZB03jqxjL3St8oT4ycQl7yZAaPH21T9VUIhQwZDZD'
 graph = facebook.GraphAPI(access_token=access_token, 
 	version = 2.7)
 
