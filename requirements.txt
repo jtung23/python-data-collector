@@ -1,6 +1,6 @@
 requests==2.18.4
 pymongo==3.6.0
-urllib3==1.22
+urllib3==1.26.5
 facebook-sdk==2.0.0
 ipython==6.2.1
 flask==0.12.2
